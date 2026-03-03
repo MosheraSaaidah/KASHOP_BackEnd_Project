@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="KAShop.BLL/KAShop.BLL.csproj" Id="b7e35401-14f2-4a1c-a6a6-df874b848b6a" />
+  <Project Path="KAShop.DAL/KAShop.DAL.csproj" Id="4cae619e-0372-4131-8314-3250c7e1d161" />
+  <Project Path="KAShop.PL/KAShop.PL.csproj" Id="876462c8-e59e-4b7a-98c0-a46e32821320" />
+</Solution>
