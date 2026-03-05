@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KAShop.DAL.DTO.Response
 {
-    public class CategoryResponse
+    public class RegisterResponse
     {
-        public int Id { get; set; }
-        public List<CategoryTranslationResponse> Translations { get; set; }
+        public string Message { get; set; }
+        public bool Success { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 
 using KAShop.BLL.Service;
 using KAShop.DAL.Data;
+using KAShop.DAL.Models;
 using KAShop.DAL.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -54,10 +56,11 @@ namespace KAShop.PL
 
                 options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
             });
-
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryService,CategoryService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             var app = builder.Build();
 

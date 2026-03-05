@@ -17,8 +17,8 @@ namespace KAShop.PL.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-       
-      
+
+
         private readonly IStringLocalizer<SharedResources> _localizer;
         private readonly ICategoryService _categoryService;
 
@@ -35,31 +35,42 @@ namespace KAShop.PL.Controllers
             var response = await _categoryService.CreateCategory(request);
 
             return Ok(
-                new{
-                _localizer["Success"].Value ,
-                response
-            });
+                new
+                {
+                    _localizer["Success"].Value,
+                    response
+                });
         }
 
         [HttpGet("")]
         public async Task<ActionResult> Index()
         {
-           var categories = await _categoryService.GetAllCategories();
-           
+            var categories = await _categoryService.GetAllCategories();
+
             return Ok(
-                new{
-                  data = categories,
-                _localizer["Success"].Value
-            });
+                new
+                {
+                    data = categories,
+                    _localizer["Success"].Value
+                });
 
         }
 
-           [HttpGet("{id}")]
-           public async Task<ActionResult> GetById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
         {
             var category = await _categoryService.GetCategory(c => c.Id == id);
             return Ok(category);
         }
-    }
 
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var deleted = await _categoryService.DeleteCategory(id);
+            if (!deleted) return NotFound(new { message = _localizer["NotFound"].Value });
+            return Ok(new { message = _localizer["Success"].Value });
+        }
+
+    }
 }

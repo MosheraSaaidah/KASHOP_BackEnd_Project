@@ -23,9 +23,17 @@ namespace KAShop.BLL.Service
         public async Task<CategoryResponse> CreateCategory(CategoryRequest request)
         {
             var category = request.Adapt<Category>();
-         await   _categoryRepository.CreateAsync(category);
+            await  _categoryRepository.CreateAsync(category);
 
             return category.Adapt<CategoryResponse>();      
+        }
+
+        public async Task<bool> DeleteCategory(int id)
+        {
+            var category = await _categoryRepository.GetOne(c=>c.Id == id);
+            if(category == null)  return false;
+            return await _categoryRepository.DeleteAsync(category);
+
         }
 
         public async Task<List<CategoryResponse>> GetAllCategories()
